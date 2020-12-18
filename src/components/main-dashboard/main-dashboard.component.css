@@ -1,5 +1,14 @@
 .grid-container {
   margin: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.wrapper {
+  padding: 15px;
+  display: block;
+  height: 100%;
 }
 
 .dashboard-card {
