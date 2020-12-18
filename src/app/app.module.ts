@@ -11,11 +11,16 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import {CreateArticleFabComponent} from './create-article-fab/create-article-fab.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainDashboardComponent
+    MainDashboardComponent,
+    CreateArticleFabComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,10 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    LayoutModule
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
