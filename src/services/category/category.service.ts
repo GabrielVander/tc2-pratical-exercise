@@ -32,7 +32,6 @@ export class CategoryService {
       .subscribe(value => this.categories.next(value));
   }
 
-
   get categories(): BehaviorSubject<Category[]> {
     return this.$categories;
   }
