@@ -5,6 +5,9 @@ import {ApiService} from '../api/api.service';
 import {catchError, map} from 'rxjs/operators';
 import News from '../../models/News';
 import NewsResponse from '../../models/api/NewsResponse';
+import NewsRequest from '../../models/NewsRequest';
+import AddArticleRequest from '../../models/api/AddArticleRequest';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +17,7 @@ export class NewsService {
   public static newsEndpoint = 'noticias/';
   private $news: BehaviorSubject<News[]> = new BehaviorSubject([]);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {
 
   }
 
@@ -38,6 +41,15 @@ export class NewsService {
     };
   }
 
+  private static toAddRequest(article: NewsRequest): AddArticleRequest {
+    return {
+      titulo: article.title,
+      subtitulo: article.subtitle,
+      conteudo: article.content,
+      idCategoria: article.categoryId,
+    };
+  }
+
   public getByCategoryId(categoryId: number): void {
     this.http
       .get<NewsResponse[]>(`${ApiService.baseAPIEndpoint + NewsService.newsEndpoint}listar.php?id=${categoryId}`)
@@ -55,4 +67,24 @@ export class NewsService {
       .subscribe(value => this.news.next(value));
   }
 
+  public addArticle(article: NewsRequest): void {
+    const request: AddArticleRequest = NewsService.toAddRequest(article);
+    this.http
+      .post(
+        `${ApiService.baseAPIEndpoint}${NewsService.newsEndpoint}cadastrar.php?titulo=${request.titulo}&subtitulo=${request.subtitulo}&conteudo=${request.conteudo}&idCategoria=${request.idCategoria}`,
+        {}
+      )
+      .subscribe((value) => {
+        // @ts-ignore
+        if (value?.status === 'ok') {
+          this.snackBar.open('Article added');
+          this.getByCategoryId(article.categoryId);
+        } else {
+          // @ts-ignore
+          this.snackBar.open(`Error: ${value?.msg}`, '', {
+            duration: 2000
+          });
+        }
+      });
+  }
 }

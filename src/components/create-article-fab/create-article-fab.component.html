@@ -1,5 +1,11 @@
 <div>
-  <button mat-fab color="primary" class="fab" aria-label="Example icon button with a delete icon">
-    <mat-icon>delete</mat-icon>
+  <button
+    mat-fab
+    matTooltip="Add news article"
+    (click)="openDialog()"
+    color="primary"
+    class="fab"
+    aria-label="Example icon button with a delete icon">
+    <mat-icon>add</mat-icon>
   </button>
 </div>
