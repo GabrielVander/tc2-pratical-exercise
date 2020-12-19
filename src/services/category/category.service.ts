@@ -6,6 +6,7 @@ import CategoryResponse from '../../models/api/CategoryResponse';
 import Category from '../../models/Category';
 import {ColorService} from '../color/color.service';
 import {BehaviorSubject} from 'rxjs';
+import {ImageService} from '../image/image.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,11 @@ export class CategoryService {
   public static categoryEndpoint = 'categorias/';
   private $categories: BehaviorSubject<Category[]> = new BehaviorSubject([]);
 
-  constructor(private http: HttpClient, private colorService: ColorService) {
+  constructor(
+    private http: HttpClient,
+    private colorService: ColorService,
+    private imageService: ImageService,
+  ) {
     this.http
       .get<CategoryResponse[]>(`${ApiService.baseAPIEndpoint + CategoryService.categoryEndpoint}listar.php`)
       .pipe(
@@ -51,6 +56,7 @@ export class CategoryService {
       ...categoryResponse,
       name: categoryResponse.nome,
       color: this.colorService.getColor(index),
+      backgroundImageURL: this.imageService.getImageUrl(categoryResponse.id)
     };
   }
 

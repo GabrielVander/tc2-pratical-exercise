@@ -8,7 +8,11 @@
       [rowHeight]=" isSmallScreen ? '1:1' :'2:1'"
       gutterSize="15px">
       <mat-grid-tile *ngFor="let category of categories" [colspan]="1" [rowspan]="1">
-        <mat-card class="card-item">
+        <mat-card class="card-item" [ngStyle]="{
+          'background-image': 'url(' + category.backgroundImageURL + ')',
+          'background-repeat': 'no-repeat',
+          'background-size': 'cover'
+        }">
           <button mat-button [routerLink]="['/category', category.id]"
                   [routerLinkActive]="'active'"
                   [state]="{ data: {title: 'Category', subtitle: category.name} }"
