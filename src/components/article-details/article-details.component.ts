@@ -38,8 +38,8 @@ export class ArticleDetailsComponent implements OnInit {
         content
       };
 
-      if (article) {
-        // this.newsService.updateArticle(article);
+      if (this.article) {
+        this.newsService.updateArticle(article, this.article.id);
       } else {
         this.newsService.addArticle(article);
       }

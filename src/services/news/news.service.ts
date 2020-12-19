@@ -8,6 +8,8 @@ import NewsResponse from '../../models/api/NewsResponse';
 import NewsRequest from '../../models/NewsRequest';
 import AddArticleRequest from '../../models/api/AddArticleRequest';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import EditArticleRequest from '../../models/api/EditArticleRequest';
+import ApiResponse from '../../models/api/ApiResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +52,16 @@ export class NewsService {
     };
   }
 
+  private static toEditRequest(article: NewsRequest, id: number): EditArticleRequest {
+    return {
+      id,
+      titulo: article.title,
+      subtitulo: article.subtitle,
+      conteudo: article.content,
+      idCategoria: article.categoryId,
+    };
+  }
+
   public getByCategoryId(categoryId: number): void {
     this.http
       .get<NewsResponse[]>(`${ApiService.baseAPIEndpoint + NewsService.newsEndpoint}listar.php?id=${categoryId}`)
@@ -70,9 +82,8 @@ export class NewsService {
   public addArticle(article: NewsRequest): void {
     const request: AddArticleRequest = NewsService.toAddRequest(article);
     this.http
-      .post(
+      .get(
         `${ApiService.baseAPIEndpoint}${NewsService.newsEndpoint}cadastrar.php?titulo=${request.titulo}&subtitulo=${request.subtitulo}&conteudo=${request.conteudo}&idCategoria=${request.idCategoria}`,
-        {}
       )
       .subscribe((value) => {
         // @ts-ignore
@@ -100,6 +111,28 @@ export class NewsService {
             duration: 2000
           });
           this.$news.next(this.$news.value.filter(news => news.id !== id));
+        } else {
+          // @ts-ignore
+          this.snackBar.open(`Error: ${value?.msg}`, '', {
+            duration: 2000
+          });
+        }
+      });
+  }
+
+  updateArticle(article: NewsRequest, id: number): void {
+    const request = NewsService.toEditRequest(article, id);
+    this.http
+      .put<ApiResponse>(`${ApiService.baseAPIEndpoint + NewsService.newsEndpoint}editar.php`, {
+        ...request
+      })
+      .subscribe(value => {
+        // @ts-ignore
+        if (value?.status === 'ok') {
+          this.snackBar.open('Article updated', '', {
+            duration: 2000
+          });
+          this.getByCategoryId(article.categoryId);
         } else {
           // @ts-ignore
           this.snackBar.open(`Error: ${value?.msg}`, '', {
