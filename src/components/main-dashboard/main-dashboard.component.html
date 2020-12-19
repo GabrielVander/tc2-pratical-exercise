@@ -1,17 +1,19 @@
 <div class="wrapper">
   <div class="grid-container" [style]="{
-            justifyContent: isSmallScreen ? 'flex-start': 'center'
+            justifyContent: 'flex-start'
        }">
     <mat-grid-list
       [cols]="isSmallScreen ? 2 : 4"
-      rowHeight="2:1"
+      [rowHeight]=" isSmallScreen ? '1:1' :'2:1'"
       gutterSize="15px">
       <mat-grid-tile *ngFor="let category of categories" [colspan]="1" [rowspan]="1">
-        <button mat-button [routerLink]="['/category', category.id]"
-                [state]="{ data: {title: 'Category', subtitle: category.name} }"
-                [style]="{textAlign: 'center', backgroundColor: category.color}">
-          <strong>{{category.name}}</strong>
-        </button>
+        <mat-card class="card-item">
+          <button mat-button [routerLink]="['/category', category.id]"
+                  [state]="{ data: {title: 'Category', subtitle: category.name} }"
+                  [style]="{textAlign: 'center', backgroundColor: category.color}">
+            <strong>{{category.name}}</strong>
+          </button>
+        </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
   </div>

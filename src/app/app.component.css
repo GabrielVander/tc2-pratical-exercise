@@ -1,8 +1,4 @@
-.app, .dashboard {
-  display: block;
-  height: 100%;
-}
-
 .app {
+  display: block;
   padding: 2vw;
 }
