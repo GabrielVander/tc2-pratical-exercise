@@ -13,15 +13,18 @@ export class MainDashboardComponent {
   isSmallScreen: boolean;
 
   constructor(private categoryService: CategoryService, breakpointObserver: BreakpointObserver) {
-    categoryService.categories.subscribe(value => this.categories = value);
+    categoryService
+      .categories
+      .subscribe(value => this.categories = value);
     breakpointObserver
       .observe([
         Breakpoints.Small,
         Breakpoints.XSmall,
       ])
-      .subscribe(value => {
-        console.log(value.matches);
-        this.isSmallScreen = value.matches;
-      });
+      .subscribe(value => this.isSmallScreen = value.matches);
+  }
+
+  categorySelected(id: number): void {
+    console.log(id);
   }
 }
