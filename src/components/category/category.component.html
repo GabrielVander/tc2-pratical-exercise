@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="content" *ngFor="let newsArticle of news">
+    <app-news [article]="newsArticle"></app-news>
+  </div>
+</div>
+<app-create-article-fab></app-create-article-fab>
+

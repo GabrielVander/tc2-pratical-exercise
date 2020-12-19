@@ -16,15 +16,17 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {HttpClientModule} from '@angular/common/http';
-import {AppRoutingModule} from './app/app-routing.module';
-import { CategoryComponent } from './category/category.component';
+import {AppRoutingModule} from '../modules/app/app-routing.module';
+import { CategoryComponent } from '../components/category/category.component';
+import { NewsComponent } from '../components/news/news.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainDashboardComponent,
     CreateArticleFabComponent,
-    CategoryComponent
+    CategoryComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,
