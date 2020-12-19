@@ -5,6 +5,10 @@
   height: 100%;
 }
 
+.mat-h1 {
+  text-align: center;
+}
+
 :host {
   display: block;
 }

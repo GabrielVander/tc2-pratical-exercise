@@ -11,18 +11,11 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    data: {
-      title: 'Dashboard',
-      subtitle: 'Pick a category to start',
-    },
     component: MainDashboardComponent,
   },
   {
     path: 'category/:categoryId',
     component: CategoryComponent,
-    data: {
-      title: 'Category',
-    },
   }
 ];
 

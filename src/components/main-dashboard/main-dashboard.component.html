@@ -1,4 +1,5 @@
 <div class="wrapper">
+  <h4 class="mat-h1">Pick a category to start</h4>
   <div class="grid-container" [style]="{
             justifyContent: 'flex-start'
        }">
@@ -9,6 +10,7 @@
       <mat-grid-tile *ngFor="let category of categories" [colspan]="1" [rowspan]="1">
         <mat-card class="card-item">
           <button mat-button [routerLink]="['/category', category.id]"
+                  [routerLinkActive]="'active'"
                   [state]="{ data: {title: 'Category', subtitle: category.name} }"
                   [style]="{textAlign: 'center', backgroundColor: category.color}">
             <strong>{{category.name}}</strong>
