@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>{{newArticle ? 'Add article' : 'Edit article'}}</h1>
 <div mat-dialog-content>
-  <app-article-details></app-article-details>
+  <app-article-details [article]="article"></app-article-details>
 </div>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>

@@ -77,8 +77,29 @@ export class NewsService {
       .subscribe((value) => {
         // @ts-ignore
         if (value?.status === 'ok') {
-          this.snackBar.open('Article added');
+          this.snackBar.open('Article added', '', {
+            duration: 2000
+          });
           this.getByCategoryId(article.categoryId);
+        } else {
+          // @ts-ignore
+          this.snackBar.open(`Error: ${value?.msg}`, '', {
+            duration: 2000
+          });
+        }
+      });
+  }
+
+  deleteArticle(id: number): void {
+    this.http
+      .get(ApiService.baseAPIEndpoint + NewsService.newsEndpoint + 'deletar.php?id=' + id)
+      .subscribe(value => {
+        // @ts-ignore
+        if (value?.status === 'ok') {
+          this.snackBar.open('Article deleted', '', {
+            duration: 2000
+          });
+          this.$news.next(this.$news.value.filter(news => news.id !== id));
         } else {
           // @ts-ignore
           this.snackBar.open(`Error: ${value?.msg}`, '', {

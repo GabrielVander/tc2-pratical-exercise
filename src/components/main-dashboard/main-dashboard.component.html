@@ -3,7 +3,7 @@
             justifyContent: 'flex-start'
        }">
     <mat-grid-list
-      [cols]="isSmallScreen ? 2 : 4"
+      [cols]="isSmallScreen ? 1 : 3"
       [rowHeight]=" isSmallScreen ? '1:1' :'2:1'"
       gutterSize="15px">
       <mat-grid-tile *ngFor="let category of categories" [colspan]="1" [rowspan]="1">

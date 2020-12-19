@@ -9,13 +9,21 @@
     </p>
   </mat-card-content>
   <mat-card-actions class="actions" *ngIf="article.editable">
-    <button mat-raised-button color="accent">
+    <button mat-raised-button color="accent" (click)="edit(article)">
       <mat-icon
         aria-hidden="false"
         aria-label="Edit icon">
         edit
       </mat-icon>
       Edit
+    </button>
+    <button mat-raised-button color="accent" (click)="delete(article.id)">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Delete icon">
+        delete
+      </mat-icon>
+      Delete
     </button>
   </mat-card-actions>
 </mat-card>
