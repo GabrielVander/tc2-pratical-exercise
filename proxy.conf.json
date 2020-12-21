@@ -1,0 +1,10 @@
+{
+  "/noticias/noticias/editar.php": {
+    "target": "https://tiagoifsp.ddns.net",
+    "secure": true,
+    "pathRewrite": {
+      "^/noticias/noticias/editar.php": ""
+    },
+    "changeOrigin": true
+  }
+}

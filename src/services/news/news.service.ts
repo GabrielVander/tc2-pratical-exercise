@@ -82,12 +82,11 @@ export class NewsService {
   public addArticle(article: NewsRequest): void {
     const request: AddArticleRequest = NewsService.toAddRequest(article);
     this.http
-      .post(
+      .post<ApiResponse>(
         `${ApiService.baseAPIEndpoint}${NewsService.newsEndpoint}cadastrar.php`,
         request
       )
       .subscribe((value) => {
-        // @ts-ignore
         if (value?.status === 'ok') {
           this.snackBar.open('Article added', '', {
             duration: 2000
@@ -124,11 +123,10 @@ export class NewsService {
   updateArticle(article: NewsRequest, id: number): void {
     const request = NewsService.toEditRequest(article, id);
     this.http
-      .put<ApiResponse>(`${ApiService.baseAPIEndpoint + NewsService.newsEndpoint}editar.php`, {
+      .post<ApiResponse>(`${ApiService.baseAPIEndpoint + NewsService.newsEndpoint}editar.php`, {
         ...request
       })
       .subscribe(value => {
-        // @ts-ignore
         if (value?.status === 'ok') {
           this.snackBar.open('Article updated', '', {
             duration: 2000
