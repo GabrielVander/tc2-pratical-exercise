@@ -82,8 +82,9 @@ export class NewsService {
   public addArticle(article: NewsRequest): void {
     const request: AddArticleRequest = NewsService.toAddRequest(article);
     this.http
-      .get(
-        `${ApiService.baseAPIEndpoint}${NewsService.newsEndpoint}cadastrar.php?titulo=${request.titulo}&subtitulo=${request.subtitulo}&conteudo=${request.conteudo}&idCategoria=${request.idCategoria}`,
+      .post(
+        `${ApiService.baseAPIEndpoint}${NewsService.newsEndpoint}cadastrar.php`,
+        request
       )
       .subscribe((value) => {
         // @ts-ignore
